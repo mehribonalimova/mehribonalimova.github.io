@@ -1,0 +1,127 @@
+import processing.core.PApplet;
+
+public class Sketch extends PApplet {
+  // ============================================
+  // CUSTOMIZE ME #1: Tree settings
+  // Change these numbers and see what happens!
+  // ============================================
+
+  // How tall is the trunk?
+  int startingLength = 200;       
+  // When do branches stop splitting? 
+  int minLength = 5;       
+  // How much smaller is each new branch? (try 0.5 to 0.8)   
+  float shrinkFactor = (float)0.67;  
+  // How wide do branches spread? (in degrees)
+  int branchAngle;     
+
+  public void settings() {
+    size(600, 600);
+  }
+
+  public void setup() {
+    background(180, 220, 255);
+    
+  }
+
+  public void draw() {
+    
+    //wind effect
+    branchAngle = (int) map(mouseX, 0, width, 10, 55);
+
+
+    //Change background based on mouse position 
+    if(mouseY < height / 3){
+      background(255, 180, 100);//orange sky
+    }else if(mouseY < 2 * height/ 3){
+      background(120 + (int)random(20), 170+(int)random(20), 255);//blue sky
+    }else{
+      background(200,255,200);//green tone
+    }
+    drawSun();
+    //For cloude
+      float cloudX = frameCount * 0.5f;
+        if(cloudX > width +100){
+          cloudX = -100;
+      }
+      drawCloud(cloudX,80);
+      drawCloud(100+cloudX,200);
+      drawCloud(cloudX+200,80);
+
+
+    // Start drawing from the bottom-center of the screen
+    translate(width/2, height);
+    //Helps tree grow, visually we can see
+    float grow = map(sin(frameCount * 0.01f), -1, 1 , 0.6f, 1.0f);
+    // Draw the tree!
+    drawBranch(startingLength * grow);
+  }
+
+  /**
+  * The recursive method that draws a tree.
+  * A branch draws itself, then asks two smaller branches to draw themselves.
+  */
+  public void drawBranch(float length) {
+    
+    // ============================================
+    // CUSTOMIZE ME #2: How does each branch look?
+    // Try changing the color or thickness!
+    // ============================================
+    stroke(80, 50, 20);              // brown
+    strokeWeight(length / 15);       // thicker branches at the base
+    
+    // Draw this branch going "up" (negative y in Processing)
+    line(0, 0, 0, -length);
+    
+    // Move the pen to the tip of the branch we just drew
+    translate(0, -length);
+    // BASE CASE: stop when the branches get too small
+    if (length < minLength) {
+      noStroke();
+      //Top of screen, orange
+    if(mouseY < height/3){
+      fill(215+random(-20, 20), 133+random(-20,20), 52);//orange            
+    }else if (mouseY < 2* height/3){
+      fill(100 + random(40), 220 + random(30), 255);//white
+    }else{
+      fill(255, random(80, 180),random(120,200));
+    }
+    ellipse(10,0,10,8);
+    return;  // stop recursing
+  }
+    
+    // RECURSIVE CASE: draw a smaller tree on the right...
+    pushMatrix();
+    rotate(radians(branchAngle));
+    drawBranch(length * shrinkFactor);
+    popMatrix();
+    
+    // ...and a smaller tree on the left.
+    pushMatrix();
+    rotate(radians(-branchAngle));
+    drawBranch(length * shrinkFactor);
+    popMatrix();
+  }
+
+  public void drawSun(){
+    //glow
+    fill(255, 200, 0, 50);
+    ellipse(width - 80, 80, 100, 100);
+
+    fill(255, 220, 0, 100);
+    ellipse(width-80, 80, 80, 80);
+
+    //core sun 
+    fill(255, 204, 0);
+    ellipse(width - 80, 80, 50, 50);
+  }
+
+  public void drawCloud(float x, float y){
+    
+    fill(255);
+
+    ellipse(x, y, 50, 30);
+    ellipse(x+15, y +10, 50, 30);
+    ellipse(x-15, y+10, 50, 30);
+  }
+}
