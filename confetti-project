@@ -1,0 +1,54 @@
+public class Confetti {
+    // instance variables
+    private int xPos;
+    private int yPos;
+    private int size;
+
+    // constructor
+    public Confetti(int s) {
+        xPos = (int)(Math.random() * 700 + 50);
+        yPos = 0;
+        size = s;
+    }
+
+    // other methods
+    public int getX() {
+        return xPos;
+    }
+
+    public int getY() {
+        return yPos;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+
+    public void fall(int speed){
+        yPos +=speed;
+
+        xPos+= (int)(Math.random()*11-5);
+
+        if(yPos > 600){
+            yPos =0;
+        }
+
+        // if (xPos >750 || xPos <50){
+        //     xPos = (int)(Math.random(*700+50);
+        // }
+    }
+
+    public Confetti(int x, int y, int s){
+        xPos = y;
+        yPos = y;
+        size = s;
+    }
+
+    public Confetti(){
+        xPos = (int)(Math.random())*700+50;
+        yPos =0;
+        size = 20;
+    }
+
+}
