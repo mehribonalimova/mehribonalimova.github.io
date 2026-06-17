@@ -1,0 +1,192 @@
+import processing.core.PApplet;
+
+public class Sketch extends PApplet {
+
+    int ellipseX = 300;
+    int ellipse2X = 270;
+    int ellipse3X = 320;
+    int ellipse4X = 272;
+    int ellipse5X = 318;
+    int ellipse6X = 297;
+    int ellipse7X = 245;
+    int ellipse8X = 350;
+    int rect9X = 283;
+    int rect10 = 300;
+    int ellipse11 = 315;
+    int rect12 = 305;
+    int rect13 = 263;
+    int ellipse14 = 275;
+    int rect15 = 240;
+    int rect16 = 275;
+    int ellipse17 = 295;
+    int rect18 = 255;
+    int rect19 = 227;
+    int ellipse20 = 245;
+    int ellipse21 = 233;
+    int rect22 = 218;
+    int rect23 = 350;
+    int ellipse24 = 350;
+    int ellipse25 = 360;
+    int rect26 = 345;
+
+
+    float  r ;//for color
+    
+
+
+    public void settings() {
+        size(600, 600);
+    }
+
+    public void setup() {
+        frameRate(20);
+        
+    }
+
+    public void draw() {
+    background(r, 25, 153);
+    //making random background
+    r = random(255);
+    //head
+    fill(0, 255, 255);
+    ellipse(ellipseX,100,105,98);
+    
+
+    //eyes 
+    fill(255, 255, 255);
+    ellipse(ellipse2X,100,25,25);
+    ellipse(ellipse3X,100,25,25);
+    fill(0);
+    ellipse(ellipse4X,100,15,20);
+    ellipse(ellipse5X,100,15,20);
+    fill(255,255,255);
+    ellipse(ellipse5X,100,7,7);
+    ellipse(ellipse4X,100,7,7);
+
+    
+    //mouse
+    fill(255, 153, 179);
+    ellipse(ellipse6X,125,15,10);
+    //ears left
+    fill(113, 57, 198);
+    ellipse(ellipse7X,100,20,40);
+    //ears right
+    fill(113, 57, 198);
+    ellipse(ellipse8X,100,20,40);
+    //neck
+    fill(71, 133, 117);
+    rect(rect9X,150,30,15);
+    //right leg
+    fill(0, 255, 255);
+    rect(rect10,320,26,70);
+    fill(255, 153, 255);
+    ellipse(ellipse11,400,25,25);
+    fill(153, 255, 153);
+    rect(rect12,410,45,20);
+
+    //left leg
+    fill(0, 255, 255);
+    rect(rect13,320,26,70);
+    fill(255, 153, 255);
+    ellipse(ellipse14,400,25,25);
+    fill(153, 255, 153);
+    rect(rect15,410,45,20);
+
+    //body
+    fill(71, 133, 117);
+    rect(rect16,270,40,20);
+    fill(0, 204, 153);
+    ellipse(ellipse17,305,75,40);
+    rect(rect18,166,80,105);
+
+    //left hand 
+    fill(0, 255, 255);
+    rect(rect19,195,15,40);
+    fill(255, 153, 255);
+    ellipse(ellipse20,180,45,45);
+    fill(153, 179, 255);
+    ellipse(ellipse21,300,35,35);
+    fill(153, 255, 153);
+    rect(rect22,220,30,65);
+    
+    // right hand
+    fill(0, 255, 255);
+    rect(rect23,195,15,40);
+    fill(255, 153, 255);
+    ellipse(ellipse24,180,45,45);
+    fill(153, 179, 255);
+    ellipse(ellipse25,300,35,35);
+    fill(0153, 255, 153);
+    rect(rect26,220,30,65);
+
+     
+     ellipseX += 5;
+     ellipse2X += 5;
+     ellipse3X += 5;
+     ellipse4X += 5;
+     ellipse5X += 5;
+     ellipse6X += 5;
+     ellipse7X += 5;
+     ellipse8X += 5;
+     rect9X += 5;
+     rect10 +=5;
+     ellipse11 += 5;
+     rect12 += 5;
+     rect13 += 5;
+     ellipse14 += 5;
+     rect15 +=5;
+     rect16 += 5;
+     ellipse17 += 5;
+     rect18 = rect18 + 5;
+     rect19 = rect19 + 5;
+     ellipse20 = ellipse20 + 5;
+     ellipse21 = ellipse21 + 5;
+     rect22 = rect22 + 5;
+     rect23 = rect23 +5;
+     ellipse24 = ellipse24 + 5;
+     ellipse25 = ellipse25 + 5;
+     rect26 = rect26 + 5;
+
+     //ellipse2X = (ellipse2X + 5)%800;
+    }
+     
+    public void mousePressed() {
+        ellipseX = 300;
+        ellipse2X = 270;
+        ellipse3X = 320;
+        ellipse4X = 272;
+        ellipse5X = 318;
+        ellipse6X = 297;
+        ellipse7X = 245;
+        ellipse8X = 350;
+        rect9X = 283;
+        rect10 = 300;
+        ellipse11 = 315;
+        rect12 = 305;
+        rect13 = 263;
+        ellipse14 = 275;
+        rect15 = 240;
+        rect16 = 275;
+        ellipse17 = 295;
+        rect18 = 255;
+        rect19 = 227;
+        ellipse20 = 245;
+        ellipse21 = 233;
+        rect22 = 218;
+        rect23 = 350;
+        ellipse24 = 350;
+        ellipse25 = 360;
+        rect26 = 345;
+
+        System.out.println("Mouse X:" + mouseX);
+        System.out.println("Mouse Y: " + mouseY );
+        System.out.println("Position: " + mouseX + "," + mouseY);
+     }
+
+    
+    
+        
+    
+
+  
+}
