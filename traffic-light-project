@@ -1,0 +1,219 @@
+import processing.core.PApplet;
+public class Sketch extends PApplet {
+    int positionX= 50;
+    int carSpeed;
+    int r, g, b;
+
+    public void settings() {
+        size(600, 600);
+    }
+    public void setup() {
+        randomColor();
+    }
+ 
+    public void draw() {
+        determineDayOrNight();
+        cloudsMoving();
+        carMovement();
+        drawTrafficLight();
+
+    }
+
+
+    public void carMovement(){
+        noStroke();
+        //Draw car body
+        fill(r, g, b); 
+        ellipse(180+positionX,505,100,80);
+        ellipse(325+positionX,505,100,80);
+        ellipse(250+positionX,465,150,140);//big one
+        fill(213, 181, 245);
+        rect(130+positionX,520,245,20);
+        //wheels stay the same
+        fill(74,73,74,941);//gray
+        ellipse(195+positionX,534,50,50);
+        ellipse(315+positionX,534,50,50);
+        fill(102,93,100);
+        ellipse(195+positionX,534,30,30);
+        ellipse(315+positionX,534,30,30);
+    }
+
+    public void drawTrafficLight(){
+        //Draw trafic light box
+        fill(160,150,150);
+        rect(470,150,75,170);
+        //Draw trafic light pole
+        fill(160,150,150);
+        rect(540,200,60,14);
+
+        if (mouseY<=200){
+            //RED LIGHT
+            fill(255,0,0);
+            ellipse(505,180,50,50);
+            fill(100,100,0);//yellow
+            ellipse(505,237,50,50);
+            fill(0,100,0);//green
+            ellipse(505,290,50,50);
+            carSpeed=0;
+            
+        }
+        else if (mouseY <= 400){
+            //YELLOW LIGHT
+            fill(100,0,0);//Red
+            ellipse(505,180,50,50);
+            fill(255,255,0);
+            ellipse(505,237,50,50);
+            fill(0,100,0);//green
+            ellipse(505,290,50,50);
+            carSpeed=1;
+        }
+
+        else {
+            //GREEN LIGHT
+            fill(100,0,0);//Red
+            ellipse(505,180,50,50);
+            fill(100,100,0);//yellow
+            ellipse(505,237,50,50);
+            fill(0,255,0);
+            ellipse(505,290,50,50);
+            carSpeed=5;//for changing speed to 0 
+        }
+        positionX = positionX+carSpeed;
+
+        if(positionX>620){
+            positionX = -150;
+            randomColor();//helps with randomnes of colors 
+        }
+
+    }
+    public void randomColor(){
+        //RANDOM COLORS 
+       r = (int) random (0,256);
+       g = (int) random (0,256);
+       b = (int) random (0,256);
+       }    
+
+    public void determineDayOrNight(){
+        //Determin if it's day or night 
+        boolean isDay = (frameCount%600)<300;
+
+        //Set background based on time of day 
+        if (isDay){
+        background(173, 218, 242);//sky color blue 
+        fill(255,255,0);
+        ellipse(500,80,80,80);//sun
+       //bulding during the day 
+        fill(145, 146, 245);
+        rect(200,150,150,300);
+        //windows 
+        fill(109, 245, 230);//green
+        rect(215,170,40,30);
+        fill(156, 57, 247);//purple 
+        rect(280,170,40,30);
+        fill(109, 245, 230);
+        rect(280,220,40,30);
+        fill(156, 57, 247);
+        rect(215,220,40,30);
+        fill(109, 245, 230);
+        rect(215,270,40,30);
+        fill(156, 57, 247);
+        rect(280,270,40,30);
+        fill(156, 57, 247);
+        rect(215,320,40,30);
+        fill(109, 245, 230);
+        rect(280,320,40,30);
+        //door
+        fill(0, 125, 194);
+        rect(240,378,55,75);
+        //roof
+        triangle(275,60,380,160,160,160);
+
+        //Another building during the day
+        fill(30, 194, 180);//green
+        rect(25,100,110,350);
+        fill(233, 133, 237);//pink
+        rect(3,120,160,30);
+        rect(3,170,160,30);
+        rect(3,220,160,30);
+        rect(3,270,160,30);
+        rect(3,320,160,30);
+        rect(3,370,160,30);
+        rect(76,100,10,300);
+        fill(135, 240, 231);
+        rect(65,410,40,40);//door
+
+        } else {
+        background(34,67,125);
+        fill(255,255,255);
+        ellipse(500,80,80,80);//moon
+       //bulding at night 
+        fill(64, 106, 219);
+        rect(200,150,150,300);
+        //windows 
+        fill(237, 233, 0);
+        rect(215,170,40,30);//yellow
+        fill(3, 24, 82);
+        rect(280,170,40,30);// dark blue
+        fill(237, 233, 0);
+        rect(280,220,40,30);
+        fill(3, 24, 82);
+        rect(215,220,40,30);
+        fill(237, 233, 0);
+        rect(215,270,40,30);
+        fill(3, 24, 82);
+        rect(280,270,40,30);
+        fill(3, 24, 82);
+        rect(215,320,40,30);
+        fill(237, 233, 0);
+        rect(280,320,40,30);
+        //door
+        fill(16, 48, 92);
+        rect(240,378,55,75);
+        //roof
+        triangle(275,60,380,160,160,160);
+
+        //Another building at night 
+        fill(152, 190, 201);//green
+        rect(25,100,110,350);
+        fill(191, 75, 170);//pink
+        rect(3,120,160,30);
+        rect(3,170,160,30);
+        rect(3,220,160,30);
+        rect(3,270,160,30);
+        rect(3,320,160,30);
+        rect(3,370,160,30);
+        rect(76,100,10,300);
+        fill(60, 92, 102);
+        rect(65,410,40,40);//door
+        }
+        //Draw road
+        fill(106,108,112);
+        rect(0,500,600,100);
+        //Draw road lines
+        fill(255,255,255);
+        rect(10,530,40,15);
+        rect(120,530,40,15);
+        rect(230,530,40,15);
+        rect(340,530,40,15);
+        rect(450,530,40,15);
+        rect(560,530,40,15);
+        //grass
+        fill(40, 120, 69);
+        rect(0,450,600,50);
+    }
+
+    public void cloudsMoving(){
+        float cloudX = (frameCount %600);
+        if ((frameCount% 600)<300){
+        fill(255);//white clouds 
+        } else{
+            fill(80,80,120,180);//dark clouds
+        }
+
+        ellipse(cloudX,100,80,50);
+        ellipse(cloudX+40,100,80,50);
+        ellipse(cloudX-200,80,70,40);
+        ellipse(cloudX-150,80,70,40);
+    }
+
+}
