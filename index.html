@@ -3,103 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mehribon Alimova | Portfolio</title>
-
+    <title>Mehribon Alimova - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #f4f7fb;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-
-        h2 {
-            color: #2563eb;
-            margin-bottom: 15px;
-        }
-
-        a {
-            color: #7c3aed;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         }
     </style>
 </head>
+<body class="bg-light">
 
-<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">💻 Mehribon's Portfolio</span>
+        </div>
+    </nav>
 
-<header>
-    <h1>Mehribon Alimova</h1>
-    <p>High School AP Computer Science Student | Future Software Engineer</p>
-</header>
+    <header class="hero-section text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Hi, I'm Mehribon Alimova</h1>
+            <p class="lead">AP Computer Science A Student & Aspiring Developer</p>
+            <div class="mx-auto" style="max-width: 600px;">
+                <p>Welcome to my personal portfolio! I am learning Java, object-oriented programming, and software engineering principles.</p>
+            </div>
+        </div>
+    </header>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>
-        Hello! My name is Mehribon Alimova, and I am a high school student 
-        passionate about computer science, web development, and technology. 
-        I enjoy creating innovative projects using HTML, CSS, JavaScript, and Java, 
-        and I am always exploring new ways to use coding to solve real-world problems.
-    </p>
-</section>
+    <main class="container my-5">
+        <h2 class="text-center mb-4">My Projects</h2>
+        
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">AP CS A FRQ Repository</h5>
+                        <p class="card-text text-muted">A collection of my Java solutions for the AP Computer Science A Free Response Questions.</p>
+                        <a href="https://github.com/mehribonalimova/ap-csa-2026-frqs" class="btn btn-primary mt-auto" target="_blank">View Repository</a>
+                    </div>
+                </div>
+            </div>
 
-<section id="projects">
-    <h2>Projects</h2>
-    <p>
-        Explore my coding projects and website creations on GitHub:
-    </p>
-    <br>
-    <a href="https://github.com/mehribonalimova/mehribonalimova.github.io" target="_blank">
-        Visit My GitHub Portfolio →
-    </a>
-</section>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Future Project</h5>
+                        <p class="card-text text-muted">A placeholder for my upcoming computer science assignments and personal coding projects.</p>
+                        <a href="#" class="btn btn-secondary mt-auto disabled">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-<footer>
-    © 2026 Mehribon Alimova | Built with HTML & CSS
-</footer>
+    <footer class="bg-dark text-white-50 text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Mehribon Alimova. Built with Bootstrap.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
