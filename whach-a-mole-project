@@ -1,0 +1,74 @@
+import processing.core.PApplet;
+public class Sketch extends PApplet {
+    Mole[] moles;//creating moles
+    int numMoles = 10;//creating 10 mole on screen 
+
+    int score;
+    int size;
+
+    public void settings() {
+        size(600, 600);
+    }
+
+    public void setup() {
+        moles = new Mole[numMoles];//new moles 
+        for( int i = 0; i<numMoles; i++){
+            //random(min,max)
+            int x = (int)random(50, width-50);
+            int y = (int)random(50,height-50);
+            //creates random size
+            size = (int)random(20,90);
+            //creates new moles giving them x, y possition and size that is randomly assigned
+            moles[i] = new Mole (this, x, y, size);
+        }   
+    }
+
+    public void draw() {
+        background(220);
+        //helps ellipse to appear
+        for( int i = 0; i<numMoles; i++){
+            moles[i].display();
+        }
+        //for changing possition every sec 
+        if(frameCount % 100 == 0){
+            fill(0);
+            int randIndex = (int) random(numMoles);
+            moles[randIndex].updatelocation();
+        }
+        //for score to be appear
+        fill(255,255,255);
+        textSize(80);
+        text(score, 100,100);
+    }
+
+    public void mousePressed(){
+        //for checking hit or not hit 
+        boolean hit = false;
+        for( int i = 0; i<numMoles; i++){
+            //if mousePressed hit then:
+            if(moles[i].isClicked(mouseX, mouseY)){
+                hit = true;
+                //if ou clicked bomb then:
+                if(moles[i].isBom){
+                    score--;//score would  decrease
+                    System.out.println("BOOM, bomb clicked!");
+                } else {
+                    //otherwise would increase
+                    score++;
+                    System.out.println("Nice hit!");
+                }
+                moles[i].updatelocation();//change loction each time
+            }
+        } 
+        //if mousePressed not hit then:
+        if(!hit){
+            System.out.println("Miss Penatly! ");
+            score--;    
+        }
+        //helps by making sure that num is not negative 
+        if(score<0){
+            score = 0;
+        }
+    }
+
+ }
