@@ -1,0 +1,32 @@
+import processing.core.PApplet;
+
+public class Sketch extends PApplet {
+    Star[]  stars =  new Star[1000];//creates arr of 1000 stars 
+    
+
+    public void settings() {
+        size(800, 800);
+    }
+
+    public void setup() {
+        background(220);
+        //translate(width/2, height/2);//let them start at center 
+        for(int i=0; i<stars.length; i++){
+            stars[i] = new Star(this);
+        }
+
+        System.out.println("Welcome to star field !");
+        System.out.println("Please move mouseX and mouseY to change speed and see side effects on stars! Enjoy");
+    }
+
+    public void draw() {
+        background(0);//updating
+        for(int i=0; i<stars.length; i++){
+            pushMatrix();
+            translate(width/2, height/2);
+            stars[i].updatelocation(); //changes location each time
+            stars[i].show();//shows stars on screen
+            popMatrix();
+    }
+}
+}
