@@ -1,0 +1,89 @@
+import processing.core.PApplet;
+
+public class Sketch extends PApplet {
+    int yPos = 300;
+    int xPos = 600;
+    int xBallon = 630;
+    int yBallon = 100;
+    int r,g,b;
+
+    public void settings() {
+        size(600, 600);
+    }
+
+    public void setup() {
+
+    }
+
+    public void draw() {
+        background(222);
+        drawText();
+        changeNumbers();
+        drawBallon();
+    }
+
+    public void drawText(){
+        //adds random colors 
+        textSize(100);
+        fill(237,59,129);
+        //Creates text that would change from 2025 to 2026 
+        text("6",xPos,300);  
+        text("202",200,300);
+        text("5",350,yPos);
+    }
+
+    public void changeNumbers(){
+        //if this conditions is true:
+        if(xPos>=400 && xBallon>=430){
+            //it would change x  and y position of text 
+            xPos-=5;
+            yPos = 300;
+            //while also will change x position of Ballon
+           xBallon-=5;
+        } else{
+            //if conditions false then it would stop positions at 400 and 430
+            xPos=400;
+            xBallon = 430;
+            //Changes yPos so it can go up
+            fill(125,218,99);
+            text("5",350,yPos);
+            yPos-=5;
+          
+        } if(xPos<=400 && xBallon<=430){
+            xPos = 350;
+            xBallon = 380;
+        } if (xPos<=350 && xBallon<=380) {
+            yBallon-=5;
+            textSize(70);
+            //adds random color by giving different numbers for fill
+            r = (int) random(0,255);
+            g = (int) random(0,255);
+            b = (int) random(0,255);
+            fill(r,g,b);
+            //after ballon went up text appeals
+            text("Happy New Year!",50,400);
+            
+            creatingSparks();
+        }
+    }
+
+    public void drawBallon(){
+        //Draw Ballon
+        fill(197,87,226);//purple
+        ellipse(xBallon,yBallon,60,80);
+        line(xBallon,yBallon+40,xBallon,yBallon+150);
+    }
+
+    public void creatingSparks(){
+        if(yBallon<700){
+            for( int i = 0; i <35; i++){
+            fill(random(100,255),random(100,255),random(100,255));
+            float xSpark = random(0,600);
+            float ySpark = random(0,600);
+            float sparkSize = random (0,20);
+            rect(xSpark, ySpark, sparkSize,sparkSize);
+            }
+        }
+    }
+
+}
