@@ -1,0 +1,106 @@
+public class Grid {
+    private int generation;
+    private int population;
+    private Cell[][] world;
+
+    public Grid(int r, int c, int p){
+        world = new Cell[r][c];
+        generation = 0;
+        populate(p);
+    }
+
+    //Fills the grid with Cell objects using a percentage change of being alive
+    private  void  populate(int percentage){
+        for( int r = 0; r < world.length; r++){
+            for( int c = 0; c <world[r].length; c++){
+                world[r][c] = new Cell(r, c, percentage);
+            }    
+        }
+        countPopulation();
+    }
+
+    //Advances the grid to the next generation
+    public void nextGeneration(){
+        //visit every Cell
+        Cell[][] newWorld = new Cell [world.length][world[0].length];
+
+        for(int row = 0; row<world.length; row++){
+            for(int col = 0; col < world[0].length; col++){
+                //IO.print(countLivingNeighbors(row, col) + " ");
+                //Count neightbors 
+                int neighborsCount = countLivingNeighbors(row, col);
+                Cell current = world[row][col];
+                //Implement Game rules 
+                if(current.isAlive()){
+                    if(neighborsCount == 2 ||
+                    neighborsCount == 3) {
+                        newWorld[row][col] = new Cell (row, col, 100); //survives
+                    }else{
+                        newWorld[row][col] = new Cell (row, col, 0); //dies
+                    } 
+                } else{
+                    if(neighborsCount == 3){
+                        newWorld[row][col] = new Cell (row, col, 100); //born
+                    }else{
+                        newWorld[row][col] = new Cell (row, col, 0);
+                    }
+                }
+            }
+        }
+        world = newWorld;
+        generation++;
+        countPopulation();
+    }   
+
+    //Counts how many neighbors cell are alive
+    public int countLivingNeighbors(int r, int c){
+        int count = 0;
+        
+        for(int dr = -1; dr <= 1; dr++){
+            for(int dc = -1; dc <= 1; dc++){
+
+                if( dr == 0 && dc == 0) continue;//skip itself
+
+                int newR = r + dr;
+                int newC = c + dc;
+
+                if (newR >= 0 && newR < world.length && newC >= 0 && newC < world[0].length){
+                    if(world[newR][newC].isAlive()){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+    
+    //Counts total number of alive cells in the grid
+    private void countPopulation(){
+        population = 0;
+        for(Cell[] row : world){
+            for(Cell c : row){
+                if(c.isAlive()){   
+                    population++; 
+                }
+            }
+        }
+    }
+
+    public int getPopulation(){
+        return population;
+    }
+
+    public int getGeneration(){
+        return generation;
+    }
+
+    public Cell[][] getWorld(){
+        return world;
+    }
+
+    public String toString(){
+        return "Gen:" + generation + "Pop:" + population;
+    }
+
+}
+    
