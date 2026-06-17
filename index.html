@@ -1,65 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mehribon Alimova - Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .hero-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mehribon Alimova Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --pink:    rgb(255, 77, 255);
+      --pink-dim: rgba(255,77,255,0.12);
+      --pink-glow: rgba(255,77,255,0.25);
+      --ink:     #0a0a0f;
+      --paper:   #fafaf8;
+      --white:   #ffffff;
+      --mid:     #6b6b7a;
+      --rule:    #e8e7e2;
+      --display: 'Syne', sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+      --sans:    'Inter', sans-serif;
+    }
+ 
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; }
+ 
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 58px;
+      background: rgba(250,250,248,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      color: var(--pink); letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--mid); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--pink); }
+ 
+    /* ── HERO ── */
+    .hero {
+      min-height: 95vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 6rem 2.5rem 4rem;
+      max-width: 1000px; margin: 0 auto; position: relative;
+    }
+ 
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.75rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 32px; height: 2px; background: var(--pink);
+    }
+ 
+    .hero h1 {
+      font-family: var(--display); font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 800; line-height: 0.95; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 2rem;
+    }
+    .hero h1 .outline {
+      -webkit-text-stroke: 2px var(--pink);
+      color: transparent;
+    }
+ 
+    .hero-bio {
+      max-width: 520px; font-size: 1rem; color: var(--mid);
+      line-height: 1.8; margin-bottom: 2.5rem; border-left: 2px solid var(--pink);
+      padding-left: 1.2rem;
+    }
+ 
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3rem;
+    }
+    .tag {
+      font-family: var(--mono); font-size: 0.7rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--pink-dim);
+      color: var(--pink);
+      border: 1px solid var(--pink-glow);
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+    }
+ 
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.08em; color: var(--ink);
+      background: var(--pink); padding: 0.85rem 1.8rem;
+      text-decoration: none; border-radius: 100px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--pink-glow); }
+ 
+    /* decorative number */
+    .hero-deco {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--display); font-size: 18rem; font-weight: 800;
+      color: var(--pink-dim); line-height: 1; pointer-events: none;
+      user-select: none; letter-spacing: -0.05em;
+    }
+ 
+    /* ── SECTIONS ── */
+    .section { max-width: 1000px; margin: 0 auto; padding: 5rem 2.5rem; }
+ 
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--display); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; color: var(--ink); margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+ 
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+ 
+    .about-text p {
+      color: var(--mid); margin-bottom: 1.1rem;
+      font-size: 0.95rem; line-height: 1.85;
+    }
+ 
+    .about-stats { display: flex; flex-direction: column; gap: 1rem; }
+ 
+    .stat-item {
+      padding: 1.3rem 1.5rem;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .stat-item::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; bottom: 0; width: 3px;
+      background: var(--pink); border-radius: 3px 0 0 3px;
+    }
+    .stat-item:hover { border-color: var(--pink-glow); transform: translateX(4px); }
+ 
+    .stat-value {
+      font-family: var(--display); font-size: 2.2rem; font-weight: 800;
+      color: var(--pink); line-height: 1; margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-family: var(--mono); font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    }
+ 
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem;
+    }
+    .project-card {
+      background: var(--white); border: 1px solid var(--rule); border-radius: 16px;
+      padding: 1.6rem; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(255,77,255,0.12);
+      border-color: var(--pink);
+    }
+    .project-icon-wrap {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--pink-dim); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.3rem; line-height: 1;
+    }
+    .project-name {
+      font-family: var(--display); font-size: 1.05rem;
+      font-weight: 700; color: var(--ink);
+    }
+    .project-desc { font-size: 0.83rem; color: var(--mid); line-height: 1.65; flex: 1; }
+    .project-arrow {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.08em; color: var(--pink);
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+ 
+    /* ── INTERESTS BAND ── */
+    .interests-band {
+      background: var(--ink); padding: 5rem 2.5rem;
+    }
+    .interests-inner { max-width: 1000px; margin: 0 auto; }
+    .interests-band .section-eyebrow { color: var(--pink); }
+    .interests-band .section-title { color: var(--white); }
+ 
+    .interests-list { display: flex; flex-wrap: wrap; gap: 0.8rem; list-style: none; }
+    .interests-list li {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: rgba(255,255,255,0.18);
+      cursor: default; transition: color 0.2s;
+      letter-spacing: -0.01em;
+    }
+    .interests-list li:hover { color: var(--pink); }
+    .interests-list li span { color: var(--pink); margin: 0 0.3rem; font-weight: 400; }
+ 
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .skills-group-title {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1rem;
+    }
+    .skills-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill {
+      font-family: var(--mono); font-size: 0.75rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 100px;
+      color: var(--ink);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-pill:hover { border-color: var(--pink); color: var(--pink); }
+    @media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr; } }
+ 
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule); padding: 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-family: var(--mono); font-size: 0.72rem; color: var(--mid); }
+    footer a { color: var(--pink); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--pink); display: inline-block;
+    }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 4rem 1.2rem 3rem; }
+      .hero-deco { display: none; }
+      .section { padding: 3.5rem 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .interests-band { padding: 3.5rem 1.2rem; }
+      footer { padding: 2rem 1.2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
 </head>
-<body class="bg-light">
-
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <span class="navbar-brand mb-0 h1">💻 Mehribon's Portfolio</span>
+<body>
+ 
+  <nav>
+    <span class="nav-logo">mehribonalimova.github.io</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#interests">Interests</a></li>
+    </ul>
+  </nav>
+ 
+  <section class="hero">
+    <div class="hero-deco">M</div>
+    <p class="hero-eyebrow">FDR High School, Class of 2027</p>
+    <h1>Mehribon<br /><span class="outline">Alimova</span></h1>
+    <p class="hero-bio">
+      A student with a passion for CS and finance. I take what I learn in school
+      and beyond and turn it into something that matters. I build, innovate,
+      and pitch ideas that make an impact in my community.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Computer Science</span>
+      <span class="tag">Finance</span>
+      <span class="tag">Fintech</span>
+      <span class="tag">Entrepreneurship</span>
+      <span class="tag">AP CS A, 2027</span>
+    </div>
+    <a class="hero-cta" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+      ↗ View GitHub
+    </a>
+  </section>
+ 
+  <section class="section" id="about">
+    <p class="section-eyebrow">Background</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a junior at Franklin D. Roosevelt High School with a deep passion for
+          computer science and finance. What drives me is not just learning. It is
+          applying what I know to create something real, both inside and outside the classroom.
+        </p>
+        <p>
+          Whether it is a hands-on coding project, a business idea, or a community
+          initiative, I love the full process of building, innovating, and pitching.
+          The most powerful thing a student can do is take knowledge and
+          turn it into impact.
+        </p>
+        <p>
+          I am always looking for the next opportunity to create, collaborate, and grow.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-value">11</div>
+          <div class="stat-label">Projects Completed</div>
         </div>
-    </nav>
-
-    <header class="hero-section text-white text-center py-5">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Hi, I'm Mehribon Alimova</h1>
-            <p class="lead">AP Computer Science A Student & Aspiring Developer</p>
-            <div class="mx-auto" style="max-width: 600px;">
-                <p>Welcome to my personal portfolio! I am learning Java, object-oriented programming, and software engineering principles.</p>
-            </div>
+        <div class="stat-item">
+          <div class="stat-value">2027</div>
+          <div class="stat-label">Expected Graduation</div>
         </div>
-    </header>
-
-    <main class="container my-5">
-        <h2 class="text-center mb-4">My Projects</h2>
-        
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">AP CS A FRQ Repository</h5>
-                        <p class="card-text text-muted">A collection of my Java solutions for the AP Computer Science A Free Response Questions.</p>
-                        <a href="https://github.com/mehribonalimova/ap-csa-2026-frqs" class="btn btn-primary mt-auto" target="_blank">View Repository</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Future Project</h5>
-                        <p class="card-text text-muted">A placeholder for my upcoming computer science assignments and personal coding projects.</p>
-                        <a href="#" class="btn btn-secondary mt-auto disabled">Coming Soon</a>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-item">
+          <div class="stat-value">FDR</div>
+          <div class="stat-label">Franklin D. Roosevelt High School</div>
         </div>
-    </main>
-
-    <footer class="bg-dark text-white-50 text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; 2026 Mehribon Alimova. Built with Bootstrap.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="section" id="skills">
+    <p class="section-eyebrow">Toolkit</p>
+    <h2 class="section-title">Languages and Tools</h2>
+    <div class="skills-grid">
+      <div>
+        <p class="skills-group-title">Languages</p>
+        <div class="skills-pills">
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">HTML</span>
+          <span class="skill-pill">CSS</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Python</span>
         </div>
-    </footer>
-
+      </div>
+      <div>
+        <p class="skills-group-title">Tools</p>
+        <div class="skills-pills">
+          <span class="skill-pill">Replit</span>
+          <span class="skill-pill">CodeSandbox</span>
+          <span class="skill-pill">Pickcode</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">Canva</span>
+          <span class="skill-pill">MS Excel</span>
+          <span class="skill-pill">MS Word</span>
+          <span class="skill-pill">Google Docs</span>
+          <span class="skill-pill">Google Slides</span>
+          <span class="skill-pill">Wix</span>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="section" id="projects">
+    <p class="section-eyebrow">Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🤖</div>
+        <div class="project-name">Robot Project</div>
+        <p class="project-desc">A programmed robot simulation exploring movement logic and autonomous behavior through code.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🚦</div>
+        <div class="project-name">Traffic Light</div>
+        <p class="project-desc">An interactive traffic light system with timed state transitions and visual feedback.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🏳️</div>
+        <div class="project-name">Flag Design</div>
+        <p class="project-desc">Recreating national flags using code precision geometry and color theory in practice.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🎆</div>
+        <div class="project-name">NYE Design Challenge</div>
+        <p class="project-desc">A New Year's Eve themed design challenge pushing creative coding with animations and effects.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🎊</div>
+        <div class="project-name">Confetti Project</div>
+        <p class="project-desc">Physics-inspired confetti animation using canvas rendering and particle systems.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🔨</div>
+        <div class="project-name">Whack-a-Mole Revisited</div>
+        <p class="project-desc">A fresh take on the classic arcade game with improved mechanics, scoring, and design.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🎨</div>
+        <div class="project-name">Genuary Project</div>
+        <p class="project-desc">Creative generative art built for the Genuary challenge one algorithmic prompt at a time.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🍬</div>
+        <div class="project-name">Candy Box</div>
+        <p class="project-desc">A colorful interactive project combining visual design with playful user interaction.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🌡️</div>
+        <div class="project-name">Temperature Project</div>
+        <p class="project-desc">A temperature conversion and visualization tool demonstrating data-driven interface design.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🧬</div>
+        <div class="project-name">Game of Life</div>
+        <p class="project-desc">Conway's Game of Life a cellular automaton exploring emergence and complex systems.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+      <a class="project-card" href="https://github.com/mehribonalimova" target="_blank" rel="noopener">
+        <div class="project-icon-wrap">🌍</div>
+        <div class="project-name">Earth Day Project</div>
+        <p class="project-desc">A visually rich project celebrating Earth Day through design and environmental awareness.</p>
+        <div class="project-arrow">View on GitHub →</div>
+      </a>
+ 
+    </div>
+  </section>
+ 
+  <div class="interests-band" id="interests">
+    <div class="interests-inner">
+      <p class="section-eyebrow">Passions</p>
+      <h2 class="section-title">What Drives Me</h2>
+      <ul class="interests-list">
+        <li>Computer Science<span>/</span></li>
+        <li>Finance &amp; Technology<span>/</span></li>
+        <li>Data Analytics<span>/</span></li>
+        <li>Investment<span>/</span></li>
+        <li>Entrepreneurship<span>/</span></li>
+        <li>Problem Solving<span>/</span></li>
+        <li>Leadership</li>
+      </ul>
+    </div>
+  </div>
+ 
+  <footer>
+    <p>Mehribon Alimova, FDR High School, Class of 2027</p>
+    <span class="footer-dot"></span>
+    <p><a href="https://github.com/mehribonalimova" target="_blank" rel="noopener">github.com/mehribonalimova</a></p>
+  </footer>
+ 
 </body>
 </html>
