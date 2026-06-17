@@ -1,0 +1,178 @@
+import processing.core.PApplet;
+
+public class Sketch extends PApplet {
+    //Global Variables for rocked
+    int rocketY = 100;
+    int rocketSpeen=3;
+
+    public void settings() {
+        size(600, 600);
+    }
+
+    public void setup() {
+    }
+
+    public void draw() {
+        //Some methods i used 
+        drawBackground();
+        draw50Stars();
+        rocketPossition();
+        drawCulturalElements();
+        Satellites();
+        ufo();
+        drawText();
+    }
+    //BACKGROUND BLUE 
+    public void drawBackground(){
+        for(int y=0; y<height;  y++){
+            //Map current y position  to 0-1 value , which helps to meke different type of blue color appeal
+            float t=map(y,0,height,0,1);
+            //Color transitions  from lighter blue to darker
+            int r = (int) lerp(30,0,t);
+            int g = (int) lerp(120,40,t);
+            int b = (int) lerp(200,100,t);
+            //helps with drowing one horizontal line
+            stroke(r,g,b);
+            line(0,y,width,y);
+        }
+    }
+    //ANIMATED TEXT
+    public void drawText(){
+        fill(random(100,155),random(100,255),random(100,255));
+        //Draws number in two location
+        textSize(32);
+        text("01101011",250,500);
+        text("1101010",240,470);
+    }
+    
+    //STAR FIELD + BID YELLOW STARS
+    public void draw50Stars() {
+        noStroke();
+        //Draws stars
+        for(int row=1; row<=4; row++){
+            for(int col=1; col<=10;  col++){
+            //Random brightness makes stars flicker
+            fill(random(200,255),random(200,255),0);
+             drawStar(370+col*20,40+row*30,10);
+            }
+        }
+        //Draws lines that connects
+        stroke(255,255,255);
+        strokeWeight(4);
+        line(30,95,90,70);
+        line(90,70,130,100);
+        line(130,100,200,100);
+        line(200,100,210,140);
+        line(210,140,230,200);
+        line(230,210,170,200);
+        line(160,200,140,250);
+        line(140,250,90,220);
+        line(90,220,30,220);
+
+        //Draws larger yellow stars on specific locations
+        noStroke();
+        fill(255,216,62);
+        drawStar(30,100,15);
+        drawStar(90,70,15);
+        drawStar(130,105,15);
+        drawStar(200,100,15);
+        drawStar(210,140,15);
+        drawStar(27,220,15);
+        drawStar(90,220,15);
+        drawStar(135,250,15);
+        drawStar(160,200,15);
+        drawStar(230,210,15);
+
+
+    }
+    //ROCKET & PLANET GRAPHICS
+    public void drawCulturalElements() {
+
+        noStroke();
+        //ROCKET BODY
+        fill(228,8,10);//red
+        triangle(305,rocketY-50,340,rocketY,270,rocketY);
+        fill(94,172,233);//blue window
+        ellipse(305,rocketY-20,30,30);
+        fill(206,206,206);//gray body
+        rect(273,rocketY,65,80);
+        fill(255,222,89);//yellow
+        rect(290,rocketY+40,20,40);
+        fill(254,153,0);
+        ellipse(305,rocketY+110,40,60);
+        fill(244,191,114);
+        ellipse(305,rocketY+105,20,40);
+
+        //MARS PLANET
+        fill(255,154,103);
+        ellipse(420,340,130,130);
+        fill(254,135,77);
+        ellipse(420,340,20,20);
+        ellipse(410,310,30,30);
+        ellipse(405,370,25,25);
+        ellipse(450,340,15,15);
+
+    }
+    //SATTELLITE GRAPHICS
+    public void Satellites(){
+        fill(67,218,224);//blue BODY
+        rect(460,500,80,40);
+        rect(475,470,17,45);
+        fill(248,91,92);//red
+        ellipse(483,470,20,20);
+        fill(206,206,206);
+        rect(420,480,40,60);
+        rect(510,480,40,60);
+        stroke(2);
+        strokeWeight(4);
+        //left part 
+        line(420,490,460,490);
+        line(420,505,460,505);
+        line(420,520,460,520);
+        line(420,535,460,535);
+        //right part
+        line(510,490,550,490);
+        line(510,505,550,505);
+        line(510,520,550,520);
+        line(510,535,550,535);
+
+    }
+    //UFO GRAPHICS
+    public void ufo(){
+        noStroke();
+        fill(223,219,219);//base
+        ellipse(80,420,110,50);
+        fill(165,162,162);
+        ellipse(80,410,60,50);
+        fill(24,243,252);//blue lights
+        ellipse(100,420,15,15);
+        ellipse(80,423,15,15);
+        ellipse(60,420,15,15);
+        fill(157,214,134);//tractor beam
+        triangle(80,430,110,550,50,550);
+    }
+    //ROCKET MOTION LOGIC
+    public void rocketPossition(){
+        //rockedY-=rockedSpeen;
+        //Reset rocked when it goes off-screen
+        if (rocketY<-200){
+            rocketY=height;
+        }
+    }
+    
+    //STAR SHAPE DRAWING
+    public void drawStar(int x, int y, int size) {
+        
+        pushMatrix();
+        translate(x, y);
+         //Helps with creating stars        
+        for (int i = 0; i < 5; i++) {
+            rotate(radians(72));
+            triangle(0, -size, (float)(-size * 0.25), (float)(-size * 0.25), (float)(size * 0.25), (float)(-size * 0.25));
+        }
+        //Small circle in the center of star
+        ellipse(0, 0, (float)(size * 0.6), (float)(size * 0.6));
+        popMatrix();
+    }
+
+}
