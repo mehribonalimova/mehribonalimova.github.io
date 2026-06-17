@@ -1,0 +1,103 @@
+import processing.core.PApplet;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Sketch extends PApplet{
+    Candy[] menu;//Array that stores menu candies
+    ArrayList<Candy> cart;//list that stores candies
+    //Scanner scanner = new Scanner(System.in);
+    String userInput = "";
+
+
+    public void settings(){
+        size(600,600);
+    }
+
+    public void setup(){
+        //Helps to create empty cart
+        cart = new ArrayList<Candy>();
+        //Helps to create menu with 3 candies
+        menu = new Candy[3];
+
+        // menu for candies
+        menu[0] = new Candy(this, "M&M");
+        menu[1] = new Candy(this, "donut");
+        menu[2] = new Candy(this, "crunch");
+
+    }
+
+    public void draw(){
+        background(230);//Clear screen every frame
+        //for candy shop background
+       // menu[0].candyDesign(0.0);
+
+        //Draw menu candies in pink boxes
+        menu[0].display(215,310);//for M&M 
+        menu[1].display(312,310);//for donut
+        menu[2].display(408,310);//for crunch
+
+
+        //Helps with drawing cart items in grid format
+        for(int i= 0; i <cart.size(); i++){
+            Candy c = cart.get(i);// Get candy from cart
+
+            //Calculate grid position 
+            int x  = 100 + (i % 5)*100;//5 candies per row
+            int y = 450 + (i / 5)*100;//Move to next row after 5 
+            c.display(x, y);//Draw candy in cart
+        }
+
+        // fill(0);
+        // textSize(18);
+        // text("Type candy name", 50,50);
+        // text(userInput, 50, 80);
+    }
+
+
+    //Runs when mouse is clicked 
+    public void mousePressed() {
+        if(mouseX >= 180 && mouseX <250 && mouseY >= 275 && mouseY <=345) {
+            cart.add(new Candy(this, "M&M"));
+        }else if(mouseX >= 277 && mouseX <= 347 && mouseY >=275 && mouseY <= 345){
+            cart.add(new Candy(this, "donut"));
+        }else if(mouseX >= 373 && mouseX <= 443 && mouseY >=275 && mouseY<=345){
+                cart.add(new Candy(this, "crunch"));
+        }
+
+
+    }
+
+    //Helps remove first candy that matches the name
+    public void removeCandyByName(String name){
+        for(int i = 0; i < cart.size(); i++){
+            if(cart.get(i).getName().equalsIgnoreCase(name)){
+                cart.remove(i);
+                break;//Stop after removing first match
+            }
+        }
+    }
+
+    // public void removeCandyInput(){
+    //     System.out.println("Enter candy by name to remove:");
+
+    //     String name = scanner.nextLine();
+    // }
+
+    public void keyPressed(){
+
+        if(keyCode == ENTER || keyCode == RETURN){
+            removeCandyByName(userInput);
+            userInput = "";
+        }
+        else if (keyCode == BACKSPACE){
+            if(userInput.length() >0){
+                userInput = userInput.substring(0, userInput.length()-1);
+            }
+        }
+        else if(Character.isLetterOrDigit(key)) {
+            userInput += key;
+        }
+    }
+
+
+
+}
